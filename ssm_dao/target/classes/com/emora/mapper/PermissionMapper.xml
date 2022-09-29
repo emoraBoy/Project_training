@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emora.mapper.PermissionMapper">
+    <insert id="save" parameterType="Permission">
+        insert into permission
+        values (null, #{permissionName}, #{url}, #{pid})
+    </insert>
+
+    <select id="findAll" resultType="com.emora.domain.Permission">
+        select *
+        from permission
+    </select>
+    <select id="findParentPermisson" resultType="com.emora.domain.Permission">
+        select *
+        from permission
+        where pid = 0;
+    </select>
+
+    <select id="findPermissionByRoleId" resultType="com.emora.domain.Permission">
+        select *
+        from role_permission rp,
+             permission p
+        where rp.permissionId = p.id
+          and roleId = #{id}
+    </select>
+</mapper>

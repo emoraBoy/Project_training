@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--全局配置-->
+    <settings>
+        <!--日志配置-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+        <!--懒加载-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+    </settings>
+
+    <!--类型别名配置-->
+    <typeAliases>
+        <package name="com.emora.domain"/>
+    </typeAliases>
+
+    <!--分页插件-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>
+    </plugins>
+    
+    <!--如果Mapper接口与Mapper的映射文件不在同一级目录需要单独扫描-->
+    <!--<mappers></mappers>-->
+</configuration>

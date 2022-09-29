@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/security https://www.springframework.org/schema/security/spring-security.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--开启Spring注解扫描-->
+    <context:component-scan base-package="com.emora"/>
+    <!--开启SpringMVC的注解扫描-->
+    <mvc:annotation-driven/>
+    <!--配置视图解析器(前后端分离)-->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--前缀配置-->
+        <property name="prefix" value="/pages/"/>
+        <!--后缀配置-->
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+
+    <!--静态资源放行   底层SpringMVC写了一个DefaultServlet，接受请求，优先去找静态资源，如果静态资源不存在，就去找处理器映射器-->
+    <mvc:default-servlet-handler/>
+
+    <!--静态资源放行-->
+    <!--mapping:映射路径     location：资源 路径-->
+    <!--<mvc:resources mapping="/image" location="/image"/>-->
+    <!--<mvc:resources mapping="/css" location="/css"/>-->
+
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--最大上传的大小-->
+        <property name="maxUploadSize" value="10000000"></property>
+        <!--当文件的大小-->
+        <property name="maxUploadSizePerFile" value="2000000"></property>
+        <!--文件名编码格式-->
+        <property name="defaultEncoding" value="utf-8"></property>
+    </bean>
+
+    <security:global-method-security secured-annotations="enabled"/>
+    <aop:aspectj-autoproxy/>
+</beans>

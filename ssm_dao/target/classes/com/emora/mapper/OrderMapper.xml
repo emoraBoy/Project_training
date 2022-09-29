@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emora.mapper.OrderMapper">
+    <resultMap id="orderMap" type="com.emora.domain.Orders">
+        <id column="id" property="id"/>
+        <result column="orderNum" property="orderNum"></result>
+        <result column="orderTime" property="orderTime"/>
+        <result column="peopleCount" property="peopleCount"/>
+        <result column="oderDesc" property="oderDesc"/>
+        <result column="payType" property="payType"/>
+        <result column="oderStatus" property="oderStatus"/>
+        <association property="product" column="productId" javaType="Product"
+                     select="com.emora.mapper.ProductMapper.findById"></association>
+    </resultMap>
+    <insert id="save" parameterType="Orders">
+        insert
+        orders values (null,
+        #{orderNum},
+        #{orderTime},
+        #{peopleCount},
+        #{oderDesc},
+        #{payType},
+        #{oderStatus},
+        #{product.id}
+        )
+    </insert>
+    <select id="findAllOrders" resultMap="orderMap">
+        select *
+        from orders
+    </select>
+</mapper>

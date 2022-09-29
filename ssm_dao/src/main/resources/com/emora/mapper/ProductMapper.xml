@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emora.mapper.ProductMapper">
+    <insert id="save" parameterType="com.emora.domain.Product">
+        insert
+        product values(null,
+        #{productNum},
+        #{productName},
+        #{cityName},
+        #{departureTime},
+        #{productPrice},
+        #{productDesc},
+        #{status}
+        )
+    </insert>
+    <update id="update" parameterType="Product">
+        update product
+        set productNum=#{productNum},
+            productName=#{productName},
+            cityName=#{cityName},
+            departureTime=#{departureTime},
+            productPrice=#{productPrice},
+            productDesc=#{productDesc},
+            status=#{status}
+        where id = #{id}
+    </update>
+    <delete id="delOne" parameterType="integer">
+        delete
+        from product
+        where id = #{id}
+    </delete>
+    <select id="findAll" resultType="com.emora.domain.Product">
+        select *
+        from product
+    </select>
+    <select id="findById" parameterType="integer" resultType="com.emora.domain.Product">
+        select *
+        from product
+        where id = #{id}
+    </select>
+</mapper>
